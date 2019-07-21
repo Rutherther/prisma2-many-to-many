@@ -1,0 +1,84 @@
+{
+  "version": "0.0.132",
+  "steps": [
+    {
+      "stepType": "CreateModel",
+      "name": "Entity",
+      "embedded": false
+    },
+    {
+      "stepType": "DeleteModel",
+      "name": "Post"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "name": "entities",
+      "type": {
+        "Relation": {
+          "to": "Entity",
+          "to_fields": [
+            "id"
+          ],
+          "name": "EntityToUser",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Entity",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Entity",
+      "name": "users",
+      "type": {
+        "Relation": {
+          "to": "User",
+          "to_fields": [
+            "id"
+          ],
+          "name": "EntityToUser",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Entity",
+      "name": "name",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "User",
+      "name": "posts"
+    }
+  ]
+}
